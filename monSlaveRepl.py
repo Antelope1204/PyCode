@@ -16,10 +16,10 @@ from email.mime.text import MIMEText
 
 #mysql configure
 MYSQL_SETTINGS = {
-    "host": "10.72.38.13",
-    "port": 6057,
+    "host": "xx",
+    "port": xx,
     "user": "dba",
-    "passwd": "84ndsjknma!"
+    "passwd": "xx"
 }
 #log configure
 logging.basicConfig(
@@ -31,11 +31,11 @@ logging.basicConfig(
 )
 #smtp configure
 
-MAIL_REVIEW_SMTP_SERVER = 'mta1.corp.ebj.elong.com'
+MAIL_REVIEW_SMTP_SERVER = 'xxx'
 MAIL_REVIEW_SMTP_PORT = 25
 MAIL_REVIEW_FROM_ADDR = 'DBA'
 MAIL_REVIEW_FROM_PASSWORD = ''
-MAIL_REVIEW_DBA_ADDR = ['linyang.li@corp.elong.com',]
+MAIL_REVIEW_DBA_ADDR = ['xx@xx',]
 
 #slave status default value
 SLAVE_IO_RUNNING = None
@@ -44,7 +44,7 @@ SLAVE_SQL_RUNNING = None
 
 #send message interface @chengyi.wu
 def send_message(telphone,message):
-    url = "http://smsweb.vip.elong.com/Default.aspx?orderno=1&phone=%s&&content=%s&bstype=alarm-005&SmsFormat=1"%(telphone,message)
+    url = "xx"%(telphone,message)
     res = requests.get(url,{}).text
     if res == 'True':
         print('发送短信成功')
@@ -106,5 +106,5 @@ def clear_log():
 if __name__ == "__main__":
     clear_log()
     if monitor_MySQL_replication():
-        send_message("18510340022", "Replication Error: Port_%s,Host_%s"%(MYSQL_SETTINGS['port'],MYSQL_SETTINGS['host']))
+        send_message("telephone", "Replication Error: Port_%s,Host_%s"%(MYSQL_SETTINGS['port'],MYSQL_SETTINGS['host']))
         send_mail([email, ], "MySQL Replication Alarm", "Slave_SQL_Running：%s Slave_IO_Running: %s "%(SLAVE_SQL_RUNNING,SLAVE_IO_RUNNING))
